@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PerformaTech | Driving Efficiency Through Advanced Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #070b14;
+      --bg-card: rgba(13, 21, 38, 0.75);
+      --bg-card-hover: rgba(20, 32, 58, 0.9);
+      --border-color: rgba(66, 120, 220, 0.2);
+      --border-glow: rgba(0, 102, 255, 0.4);
+      --cobalt-dark: #0044b3;
+      --cobalt: #0066ff;
+      --cobalt-light: #2e86de;
+      --cyan-bright: #00d2ff;
+      --silver-dark: #64748b;
+      --silver-mid: #94a3b8;
+      --silver-light: #e2e8f0;
+      --white: #ffffff;
+      --text-muted: #8ca0ba;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--silver-light);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(0, 102, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(0, 210, 255, 0.08) 0%, transparent 45%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(7, 11, 20, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+    .navbar-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-svg-wrap {
+      width: 44px;
+      height: 44px;
+      filter: drop-shadow(0 0 10px rgba(0, 102, 255, 0.45));
+    }
+    .brand-name {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--white);
+    }
+    .brand-name span {
+      background: linear-gradient(135deg, var(--cobalt-light), var(--cyan-bright));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-link {
+      color: var(--silver-mid);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover {
+      color: var(--cyan-bright);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn-phone {
+      color: var(--silver-light);
+      text-decoration: none;
+      font-size: 14px;
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.2s ease;
+    }
+    .btn-phone:hover {
+      border-color: var(--cobalt);
+      color: var(--white);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cobalt), var(--cobalt-dark));
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 20px rgba(0, 102, 255, 0.35);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(0, 102, 255, 0.55);
+      background: linear-gradient(135deg, #1a75ff, #0052cc);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 180px 0 100px;
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(0, 102, 255, 0.12);
+      border: 1px solid var(--border-glow);
+      color: var(--cyan-bright);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-title {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 22px;
+      letter-spacing: -1px;
+    }
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, #ffffff 20%, var(--silver-light) 40%, var(--cyan-bright) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 580px;
+      line-height: 1.7;
+    }
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-secondary {
+      background: rgba(148, 163, 184, 0.08);
+      color: var(--silver-light);
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      transition: all 0.2s ease;
+    }
+    .btn-secondary:hover {
+      background: rgba(148, 163, 184, 0.16);
+      border-color: var(--silver-mid);
+      color: var(--white);
+    }
+
+    /* Live Telemetry Card */
+    .telemetry-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+      position: relative;
+    }
+    .telemetry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .live-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--success);
+      font-weight: 600;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--success);
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .metric-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .metric-val {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .metric-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+    .overall-oee-box {
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(0, 210, 255, 0.05));
+      border: 1px solid var(--border-glow);
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .oee-number {
+      font-size: 38px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--cyan-bright);
+    }
+
+    /* Section Styling */
+    .section-pad {
+      padding: 100px 0;
+    }
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 60px;
+    }
+    .section-kicker {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--cyan-bright);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px 24px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+      border-color: var(--cobalt-light);
+      box-shadow: 0 16px 40px rgba(0, 102, 255, 0.15);
+    }
+    .service-icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: rgba(0, 102, 255, 0.15);
+      border: 1px solid var(--border-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--cyan-bright);
+      margin-bottom: 24px;
+    }
+    .service-title {
+      font-size: 20px;
+      color: var(--white);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .service-text {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Interactive OEE Calculator */
+    .calc-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+    }
+    .input-group {
+      margin-bottom: 20px;
+    }
+    .input-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--silver-light);
+      margin-bottom: 8px;
+    }
+    .input-field {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input-field:focus {
+      border-color: var(--cobalt-light);
+      box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.25);
+    }
+    .calc-results {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .res-metric {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .res-label {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .res-val {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--silver-light);
+      font-size: 16px;
+    }
+    .final-score-box {
+      text-align: center;
+      padding: 24px 0 10px;
+    }
+    .final-score-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--silver-mid);
+    }
+    .final-score-num {
+      font-size: 56px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--cyan-bright);
+      margin: 8px 0;
+    }
+    .badge-status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Contact / Assessment Form */
+    .contact-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 50px 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-col-full {
+      grid-column: span 2;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--cobalt), var(--cobalt-dark));
+      color: var(--white);
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 102, 255, 0.35);
+      transition: all 0.2s ease;
+    }
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #1a75ff, #0052cc);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 60px 0 30px;
+      background: rgba(4, 7, 14, 0.95);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 13px;
+      color: var(--silver-dark);
+    }
+
+    @media (max-width: 992px) {
+      .hero-grid, .calc-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 768px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-col-full {
+        grid-column: span 1;
+      }
+      .nav-menu, .btn-phone {
+        display: none;
+      }
+      .hero-title {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="#" class="brand-logo">
+        <div class="logo-svg-wrap">
+          <!-- Official PerformaTech Vector SVG Logo -->
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M44 32C41 32 39 33 37 35L33 33L30 38L34 41C33.5 43 33.5 45 34 47L30 50L33 55L37 53C39 55 41 56 44 56L44 60L49 59.5L49 55.5C50 55.2 51 54.8 52 54.2L44 46.2V32Z" fill="#94A3B8"/>
+            <path d="M44 20L44 80L50 78V62H60C74 62 82 52 82 41C82 30 74 20 60 20H44Z" fill="url(#pBlueGrad)"/>
+            <path d="M50 30H60C68 30 72 35 72 41C72 47 68 52 60 52H50V30Z" fill="#070B14"/>
+            <rect x="52" y="42" width="4" height="10" rx="1" fill="#0066FF"/>
+            <rect x="58" y="36" width="4" height="16" rx="1" fill="#0088FF"/>
+            <rect x="64" y="30" width="4" height="22" rx="1" fill="#00D2FF"/>
+            <defs>
+              <linearGradient id="pBlueGrad" x1="44" y1="20" x2="82" y2="80" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0066FF"/>
+                <stop offset="1" stop-color="#003899"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="brand-name">Performa<span>Tech</span></span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#calculator" class="nav-link">OEE Calculator</a></li>
+        <li><a href="#assessment" class="nav-link">Plant Assessment</a></li>
+        <li><a href="https://lnkd.in/p/esCfWp_A" target="_blank" class="nav-link"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="tel:01027666894" class="btn-phone"><i class="fa-solid fa-phone"></i> 01027666894</a>
+        <a href="#assessment" class="btn-primary">Schedule a Plant Visit</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-badge">
+          <i class="fa-solid fa-industry"></i> Industrial Performance Consulting
+        </div>
+        <h1 class="hero-title">
+          Helping Manufacturing Leaders <span class="gradient-text">See, Understand & Improve</span> Performance.
+        </h1>
+        <p class="hero-subtitle">
+          From production lines and day-to-day operations to executive visibility. We eliminate bottlenecks, uncover hidden capacity, and transform manufacturing data into measurable bottom-line profit.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#assessment" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Schedule a Plant Visit</a>
+          <a href="#calculator" class="btn-secondary"><i class="fa-solid fa-calculator"></i> Try OEE Calculator</a>
+        </div>
+      </div>
+
+      <!-- Live Simulation Dashboard Card -->
+      <div class="telemetry-card">
+        <div class="telemetry-header">
+          <div>
+            <div style="font-weight: 700; color: #fff; font-size: 15px;">Packaging Line 03 Telemetry</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Real-time OEE Stream</div>
+          </div>
+          <div class="live-indicator">
+            <span class="pulse-dot"></span> CONNECTED
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric-box">
+            <div class="metric-val" style="color: #60a5fa;">92.4%</div>
+            <div class="metric-label">Availability</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val" style="color: #38bdf8;">88.1%</div>
+            <div class="metric-label">Performance</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val" style="color: #34d399;">98.6%</div>
+            <div class="metric-label">Quality</div>
+          </div>
+        </div>
+
+        <div class="overall-oee-box">
+          <div>
+            <div style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Overall Equipment Effectiveness</div>
+            <div style="font-size: 13px; color: #94a3b8; margin-top: 2px;">Benchmarked against World-Class standard</div>
+          </div>
+          <div class="oee-number">80.3%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section-pad" style="background: rgba(0,0,0,0.2);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">Core Expertise</span>
+        <h2 class="section-title">Engineered For Measurable Shop-Floor Impact</h2>
+        <p class="section-desc">Practical improvement methodologies that bridge the gap between machine operations and executive decision-making.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fa-solid fa-chart-line"></i></div>
+          <h3 class="service-title">OEE & TEEP Optimization</h3>
+          <p class="service-text">Rigorous measurement and elimination of the Six Big Losses. We identify root causes behind micro-stops, slow cycles, and changeover delays.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fa-solid fa-gauge-high"></i></div>
+          <h3 class="service-title">BI & Decision Support</h3>
+          <p class="service-text">Custom production dashboards and Power BI reporting frameworks giving plant managers real-time visibility over line output and KPI deviations.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+          <h3 class="service-title">Root Cause Investigation</h3>
+          <p class="service-text">Systematic investigation methodologies (Fishbone, 5-Whys, DMAIC) to solve recurring technical downtime and quality defects permanently.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fa-solid fa-recycle"></i></div>
+          <h3 class="service-title">Lean Manufacturing & 5S</h3>
+          <p class="service-text">Optimizing shop-floor workspace organization, standard work execution, and flow to minimize physical waste and operator idle time.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fa-solid fa-microchip"></i></div>
+          <h3 class="service-title">Operational Excellence</h3>
+          <p class="service-text">End-to-end operational reviews establishing standard operating procedures (SOPs), Good Documentation Practices (GDP), and capacity utilization.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fa-solid fa-users-gear"></i></div>
+          <h3 class="service-title">Supervisory Training</h3>
+          <p class="service-text">Hands-on workshops training frontline supervisors and line leaders to identify bottlenecks, execute GEMBA walks, and sustain daily KPIs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive OEE Calculator Section -->
+  <section id="calculator" class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">Diagnostic Tool</span>
+        <h2 class="section-title">Interactive OEE Calculator</h2>
+        <p class="section-desc">Test your line metrics below to evaluate Availability, Performance, and Quality yield in real-time.</p>
+      </div>
+
+      <div class="calc-wrapper">
+        <div class="calc-inputs">
+          <div class="input-group">
+            <label class="input-label">Planned Production Time (Hours) <span id="label-planned">8.0 hrs</span></label>
+            <input type="number" id="inp-planned" class="input-field" value="8" step="0.5" min="1">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Total Unplanned Downtime (Minutes) <span id="label-down">45 mins</span></label>
+            <input type="number" id="inp-down" class="input-field" value="45" step="5" min="0">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Theoretical Speed (Units / Hour) <span id="label-speed">1,200 u/h</span></label>
+            <input type="number" id="inp-speed" class="input-field" value="1200" step="50" min="10">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Total Units Produced (Actual) <span id="label-total">8,200 units</span></label>
+            <input type="number" id="inp-total" class="input-field" value="8200" step="50" min="0">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Scrap / Defective Units <span id="label-defect">180 units</span></label>
+            <input type="number" id="inp-defect" class="input-field" value="180" step="10" min="0">
+          </div>
+        </div>
+
+        <div class="calc-results">
+          <div>
+            <div style="font-weight: 700; color: #fff; margin-bottom: 16px; font-size: 16px;">Calculated Breakdown</div>
+            <div class="res-metric">
+              <span class="res-label">Availability (Operating / Planned)</span>
+              <span class="res-val" id="res-avail">90.6%</span>
+            </div>
+            <div class="res-metric">
+              <span class="res-label">Performance (Actual / Theoretical)</span>
+              <span class="res-val" id="res-perf">94.3%</span>
+            </div>
+            <div class="res-metric">
+              <span class="res-label">Quality Rate (Good / Total Units)</span>
+              <span class="res-val" id="res-qual">97.8%</span>
+            </div>
+          </div>
+
+          <div class="final-score-box">
+            <span class="final-score-title">Overall Equipment Effectiveness</span>
+            <div class="final-score-num" id="res-oee">83.5%</div>
+            <div class="badge-status" id="res-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">Strong / Near World-Class</div>
+          </div>
+
+          <a href="#assessment" class="btn-primary" style="justify-content: center; width: 100%; margin-top: 16px;">
+            Schedule a Diagnostic Assessment
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Assessment Request Section -->
+  <section id="assessment" class="section-pad" style="background: rgba(0,0,0,0.25);">
+    <div class="container">
+      <div class="contact-container">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <span class="section-kicker">Get In Touch</span>
+          <h2 style="font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 10px;">Request an On-Site Assessment</h2>
+          <p style="color: var(--text-muted); font-size: 14px;">Let our engineering specialists visit your production floor to identify hidden bottlenecks and evaluate line OEE firsthand.</p>
+        </div>
+
+        <form id="assessmentForm" onsubmit="event.preventDefault(); alert('Thank you! Your request for an On-Site Assessment has been received. Our team will contact you within 24 hours.');">
+          <div class="form-grid">
+            <div class="input-group">
+              <label class="input-label">Your Name</label>
+              <input type="text" class="input-field" placeholder="e.g. Eng. Ahmed" required>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Company / Facility Name</label>
+              <input type="text" class="input-field" placeholder="e.g. Pharma Industries" required>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Direct Phone / WhatsApp</label>
+              <input type="tel" class="input-field" placeholder="01XXXXXXXXX" required>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Industry Sector</label>
+              <select class="input-field" style="color: #fff; background: #0c1424;">
+                <option>Pharmaceutical & Medical</option>
+                <option>Food & Beverage (FMCG)</option>
+                <option>Packaging & Printing</option>
+                <option>Chemical & Industrial</option>
+                <option>Other Manufacturing</option>
+              </select>
+            </div>
+            <div class="input-group form-col-full">
+              <label class="input-label">Primary Challenge or Objective</label>
+              <textarea class="input-field" rows="3" placeholder="Describe current line bottlenecks, changeover delays, or OEE goals..."></textarea>
+            </div>
+            <div class="form-col-full">
+              <button type="submit" class="btn-submit">Schedule a Plant Visit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo" style="margin-bottom: 16px;">
+            <span class="brand-name">Performa<span>Tech</span></span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 14px; max-width: 400px; line-height: 1.6;">
+            Helping manufacturing leaders see, understand, and improve production performance through data-driven analysis, Lean engineering, and practical shop-floor solutions.
+          </p>
+        </div>
+        <div>
+          <h4 style="color: #fff; font-size: 15px; margin-bottom: 16px;">Quick Links</h4>
+          <ul style="list-style: none; font-size: 14px; line-height: 2;">
+            <li><a href="#services" style="color: var(--text-muted); text-decoration: none;">Services</a></li>
+            <li><a href="#calculator" style="color: var(--text-muted); text-decoration: none;">OEE Calculator</a></li>
+            <li><a href="#assessment" style="color: var(--text-muted); text-decoration: none;">Plant Visit</a></li>
+            <li><a href="https://lnkd.in/p/esCfWp_A" target="_blank" style="color: var(--cyan-bright); text-decoration: none;">Official LinkedIn</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: #fff; font-size: 15px; margin-bottom: 16px;">Contact Us</h4>
+          <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;"><i class="fa-solid fa-phone" style="color: var(--cobalt);"></i> 01027666894</p>
+          <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;"><i class="fa-solid fa-location-dot" style="color: var(--cobalt);"></i> Cairo, Egypt</p>
+          <p style="color: var(--text-muted); font-size: 14px;"><i class="fa-solid fa-clock" style="color: var(--cobalt);"></i> Mon - Fri: 8:00 AM - 5:00 PM</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 PerformaTech. All rights reserved.</div>
+        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--silver-dark);">ENGINEERED FOR PRODUCTION EXCELLENCE</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Live OEE Calculator Script
+    function calculateLiveOEE() {
+      const plannedHrs = parseFloat(document.getElementById('inp-planned').value) || 0;
+      const downMins = parseFloat(document.getElementById('inp-down').value) || 0;
+      const speedHr = parseFloat(document.getElementById('inp-speed').value) || 0;
+      const totalUnits = parseFloat(document.getElementById('inp-total').value) || 0;
+      const defectUnits = parseFloat(document.getElementById('inp-defect').value) || 0;
+
+      const plannedMins = plannedHrs * 60;
+      const operatingMins = Math.max(0, plannedMins - downMins);
+      const avail = plannedMins > 0 ? (operatingMins / plannedMins) : 0;
+
+      const operatingHrs = operatingMins / 60;
+      const theoreticalUnits = operatingHrs * speedHr;
+      const perf = theoreticalUnits > 0 ? Math.min(1.2, totalUnits / theoreticalUnits) : 0;
+
+      const goodUnits = Math.max(0, totalUnits - defectUnits);
+      const qual = totalUnits > 0 ? (goodUnits / totalUnits) : 0;
+
+      const oee = avail * perf * qual;
+
+      document.getElementById('res-avail').innerText = (avail * 100).toFixed(1) + '%';
+      document.getElementById('res-perf').innerText = (perf * 100).toFixed(1) + '%';
+      document.getElementById('res-qual').innerText = (qual * 100).toFixed(1) + '%';
+      document.getElementById('res-oee').innerText = (oee * 100).toFixed(1) + '%';
+
+      const badge = document.getElementById('res-badge');
+      if (oee >= 0.85) {
+        badge.innerText = 'World-Class Standard (>85%)';
+        badge.style.background = 'rgba(16, 185, 129, 0.2)';
+        badge.style.color = '#10b981';
+      } else if (oee >= 0.70) {
+        badge.innerText = 'Competent / Typical (70% - 84%)';
+        badge.style.background = 'rgba(0, 102, 255, 0.2)';
+        badge.style.color = '#38bdf8';
+      } else {
+        badge.innerText = 'Opportunity For Rapid Gains (<70%)';
+        badge.style.background = 'rgba(239, 68, 68, 0.2)';
+        badge.style.color = '#ef4444';
+      }
+    }
+
+    ['inp-planned', 'inp-down', 'inp-speed', 'inp-total', 'inp-defect'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calculateLiveOEE);
+    });
+
+    calculateLiveOEE();
+  </script>
+</body>
+</html>
