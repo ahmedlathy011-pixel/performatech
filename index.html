@@ -785,7 +785,7 @@
           <p style="color: var(--text-muted); font-size: 14px;">Let our engineering specialists visit your production floor to identify hidden bottlenecks and evaluate line OEE firsthand.</p>
         </div>
 
-        <<form id="assessmentForm" onsubmit="sendAssessmentToWhatsApp(event)">')
+        <form id="assessmentForm" onsubmit="sendAssessmentToWhatsApp(event)">
           <div class="form-grid">
             <div class="input-group">
               <label class="input-label">Your Name</label>
@@ -806,6 +806,7 @@
                 <option>Food & Beverage (FMCG)</option>
                 <option>Packaging & Printing</option>
                 <option>Chemical & Industrial</option>
+                <option>Chemical & Cosmotics </option>
                 <option>Other Manufacturing</option>
               </select>
             </div>
@@ -905,26 +906,35 @@
     });
 
     calculateLiveOEE();
-    function sendAssessmentToWhatsApp(e) {
-  e.preventDefault();
+ function sendAssessmentToWhatsApp(event) {
+  event.preventDefault();
 
   const phoneTarget = "201027666894";
+  const form = event.target;
+  
+  // جمع كل الحقول المكتوبة داخل النموذج تلقائياً
+  const inputs = form.querySelectorAll("input, select, textarea");
+  let messageDetails = "";
 
-  const name = document.getElementById("clientName") ? document.getElementById("clientName").value.trim() : "";
-  const company = document.getElementById("clientCompany") ? document.getElementById("clientCompany").value.trim() : "";
-  const phone = document.getElementById("clientPhone") ? document.getElementById("clientPhone").value.trim() : "";
-  const notes = document.getElementById("clientNotes") ? document.getElementById("clientNotes").value.trim() : "";
+  inputs.forEach((input) => {
+    // تجاهل الأزرار
+    if (input.type === "submit" || input.type === "button") return;
 
-  let msg = `*طلب حجز زيارة ميدانية - PerformaTech*%0A%0A`;
-  msg += `👤 *الاسم:* ${encodeURIComponent(name)}%0A`;
-  msg += `🏭 *المصنع / الشركة:* ${encodeURIComponent(company)}%0A`;
-  msg += `📞 *رقم الهاتف:* ${encodeURIComponent(phone)}%0A`;
-  if (notes) {
-    msg += `📝 *ملاحظات / تحديات الخط:* ${encodeURIComponent(notes)}%0A`;
-  }
+    const value = input.value.trim();
+    if (value) {
+      // جلب اسم الحقل من الـ placeholder أو الـ label السابق له
+      const label = input.placeholder || input.name || "بيان";
+      messageDetails += `🔹 *${label}:* ${value}%0A`;
+    }
+  });
 
-  const waUrl = `https://wa.me/${phoneTarget}?text=${msg}`;
-  window.open(waUrl, "_blank");
+  let fullMessage = `*طلب حجز زيارة ميدانية - PerformaTech*%0A%0A`;
+  fullMessage += messageDetails;
+
+  const whatsappUrl = `https://wa.me/${phoneTarget}?text=${fullMessage}`;
+
+  // فتح محادثة الواتساب
+  window.open(whatsappUrl, "_blank");
 }
   </script>
 </body>
