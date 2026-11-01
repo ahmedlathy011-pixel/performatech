@@ -905,6 +905,27 @@
     });
 
     calculateLiveOEE();
+    function sendAssessmentToWhatsApp(e) {
+  e.preventDefault();
+
+  const phoneTarget = "201027666894";
+
+  const name = document.getElementById("clientName") ? document.getElementById("clientName").value.trim() : "";
+  const company = document.getElementById("clientCompany") ? document.getElementById("clientCompany").value.trim() : "";
+  const phone = document.getElementById("clientPhone") ? document.getElementById("clientPhone").value.trim() : "";
+  const notes = document.getElementById("clientNotes") ? document.getElementById("clientNotes").value.trim() : "";
+
+  let msg = `*طلب حجز زيارة ميدانية - PerformaTech*%0A%0A`;
+  msg += `👤 *الاسم:* ${encodeURIComponent(name)}%0A`;
+  msg += `🏭 *المصنع / الشركة:* ${encodeURIComponent(company)}%0A`;
+  msg += `📞 *رقم الهاتف:* ${encodeURIComponent(phone)}%0A`;
+  if (notes) {
+    msg += `📝 *ملاحظات / تحديات الخط:* ${encodeURIComponent(notes)}%0A`;
+  }
+
+  const waUrl = `https://wa.me/${phoneTarget}?text=${msg}`;
+  window.open(waUrl, "_blank");
+}
   </script>
 </body>
 </html>
